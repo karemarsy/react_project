@@ -10,10 +10,10 @@ class App extends Component {
     ],
   }
 
-   buttonHandler = () =>{
+   buttonHandler = (newName) =>{
     this.setState ({
       person:[
-        {name:'Karema',age:'25'},
+        {name:newName,age:'25'},
         {name:'herve', age:'24'},
       ]
     })
@@ -24,9 +24,8 @@ class App extends Component {
     return (
       <div className="App">
         <Person name={this.state.person[0].name} age={this.state.person[0].age}></Person>
-        <Person name={this.state.person[1].name} age={this.state.person[1].age}>I like eating</Person>
-        <button onClick={this.buttonHandler}>click here </button>
-
+        <Person name={this.state.person[1].name} age={this.state.person[1].age} Click={this.buttonHandler.bind(this, 'joha90')}>I like eating</Person>
+        <button onClick={this.buttonHandler.bind(this, 'johani')}>click here </button>
       </div>
     );
   }
