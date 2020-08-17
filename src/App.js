@@ -1,31 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
 
-const App = (props) => {
-  const [ personsState , setPersonsState]= useState[{
-    person:[
+class App extends Component {
+  state = {
+    person: [
       {name:'arsene',age:'26'},
       {name:'herve', age:'34'},
-    ]
-  }];
+    ],
+  }
 
-  const buttonHandler = () =>{
-    setPersonsState ({
-      Person:[
+   buttonHandler = () =>{
+    this.setState ({
+      person:[
         {name:'Karema',age:'25'},
         {name:'herve', age:'24'},
       ]
     })
+      
+    
   }
+  render(){
     return (
       <div className="App">
-        <Person name={personsState.Person[0].name} age={personsState.Person[0].age}></Person>
-        <Person name={personsState.Person[1].name} age={personsState.Person[1].age}>I like eating</Person>
-        <button onClick={buttonHandler}>click here </button>
+        <Person name={this.state.person[0].name} age={this.state.person[0].age}></Person>
+        <Person name={this.state.person[1].name} age={this.state.person[1].age}>I like eating</Person>
+        <button onClick={this.buttonHandler}>click here </button>
 
       </div>
     );
+  }
 }
 
 export default App;
