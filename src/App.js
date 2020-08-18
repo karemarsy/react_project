@@ -1,31 +1,61 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
 
-const App = (props) => {
-  const [ personsState , setPersonsState]= useState[{
-    person:[
+class App extends Component {
+  state = {
+    person: [
       {name:'arsene',age:'26'},
       {name:'herve', age:'34'},
-    ]
-  }];
+      {name:'lewis', age:'34'},
+    ],
+    personShow: false
+  }
 
-  const buttonHandler = () =>{
-    setPersonsState ({
-      Person:[
-        {name:'Karema',age:'25'},
+   buttonHandler = (newName) =>{
+    this.setState ({
+      person:[
+        {name:newName,age:'25'},
         {name:'herve', age:'24'},
+        {name:'lewis', age:'34'},
       ]
     })
   }
+
+  togglePersonsHandler = () =>{
+   const doesShow = this.state.personShow;
+   this.setState ({personShow : !doesShow});
+  }
+
+  nameChangeHandler = (event) =>{
+    this.setState ({
+      person:[
+        {name: event.target.value,age:'25'},
+        {name:'herve', age:'24'},
+        {name:'lewis', age:'34'},
+      ]
+    })
+  }
+  render(){
     return (
       <div className="App">
-        <Person name={personsState.Person[0].name} age={personsState.Person[0].age}></Person>
-        <Person name={personsState.Person[1].name} age={personsState.Person[1].age}>I like eating</Person>
-        <button onClick={buttonHandler}>click here </button>
 
+        <button onClick={this.togglePersonsHandler}>click here </button>
+        { this.state.personShow === true ? 
+        <div>
+        <Person name={this.state.person[0].name} age={this.state.person[0].age} changed={this.nameChangeHandler}></Person>
+        <Person name={this.state.person[1].name} age={this.state.person[1].age}></Person>
+        <Person name={this.state.person[2].name} age={this.state.person[2].age}></Person>
+        
+        
+        </div> 
+        :null
+        }
+        
       </div>
     );
+  }
 }
 
 export default App;
+
