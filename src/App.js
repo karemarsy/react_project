@@ -4,7 +4,7 @@ import Person from './Person/Person';
 
 class App extends Component {
   state = {
-    person: [
+    persons: [
       {name:'arsene',age:'26'},
       {name:'herve', age:'34'},
       {name:'lewis', age:'34'},
@@ -12,15 +12,12 @@ class App extends Component {
     personShow: false
   }
 
-   buttonHandler = (newName) =>{
-    this.setState ({
-      person:[
-        {name:newName,age:'25'},
-        {name:'herve', age:'24'},
-        {name:'lewis', age:'34'},
-      ]
-    })
-  }
+   deletePersonHandler =(personIndex) =>{
+     const person = this.state.persons
+     person.splice(personIndex, 1);
+     this.setState({persons: Person})
+
+   }
 
   togglePersonsHandler = () =>{
    const doesShow = this.state.personShow;
@@ -42,8 +39,8 @@ class App extends Component {
     if (this.state.personShow){
       persons = (
         <div>
-          {this.state.person.map(arsene => {
-            return (<Person name={arsene.name} age={arsene.age}/>)
+          {this.state.persons.map((arsene, index) => {
+            return (<Person click={ ()=>this.deletePersonHandler(index)} name={arsene.name} age={arsene.age}/>)
           })}
         </div> 
       );
